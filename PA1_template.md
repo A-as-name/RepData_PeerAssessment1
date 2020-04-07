@@ -41,8 +41,9 @@ n_steps_day <- df %>% group_by(date) %>% summarise(tt_steps = sum(steps, na.rm =
 mean_steps_day <- format(round(mean(n_steps_day$tt_steps)), big.mark=",")
 median_steps_day <- format(median(n_steps_day$tt_steps), big.mark=",")
 
-ggplot(data = n_steps_day, aes(x = date, y = tt_steps)) + 
-  geom_col()
+ggplot(data = n_steps_day, aes(x = tt_steps)) + 
+  geom_histogram(binwidth = 500) +
+  xlab("Total steps per day")
 ```
 
 ![](PA1_template_files/figure-html/total_number-1.png)<!-- -->
@@ -59,7 +60,8 @@ max_steps_5mins <- avg_steps_5mins[[which.max(avg_steps_5mins$avg_steps), "inter
 
 ggplot(data = avg_steps_5mins) + 
   geom_line(aes(x = interval, y = avg_steps), size = 1.2) + 
-  geom_text(x = max_steps_5mins, y = round(max(avg_steps_5mins$avg_steps)+5), label = paste("maximum:", as.character(max_steps_5mins)))
+  geom_text(x = max_steps_5mins, y = round(max(avg_steps_5mins$avg_steps)+5), label = paste("maximum:", as.character(max_steps_5mins))) +
+  xlab("5-minute interval")
 ```
 
 ![](PA1_template_files/figure-html/average_daily_activity-1.png)<!-- -->
@@ -86,8 +88,9 @@ n_steps_day_new <- df_new %>% group_by(date) %>% summarise(tt_steps = sum(steps)
 mean_steps_day_new <- format(round(mean(n_steps_day_new$tt_steps)), big.mark=",")
 median_steps_day_new <- format(median(n_steps_day_new$tt_steps), big.mark=",")
 
-ggplot(data = n_steps_day_new, aes(x = date, y = tt_steps)) + 
-  geom_col()
+ggplot(data = n_steps_day_new, aes(x = tt_steps)) + 
+  geom_histogram(binwidth = 500) + 
+  xlab("Total steps per day (Imputed")
 ```
 
 ![](PA1_template_files/figure-html/filling_missing_values-1.png)<!-- -->
